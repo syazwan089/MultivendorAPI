@@ -41,7 +41,7 @@ namespace MultiVendorAPI.Data
                 Level = users.Level,
                 MasterId = users.MasterId,
                 Name = users.Name,
-                AgentId = users.AgentId,
+                UsersId = users.UsersId,
                 StripeKey = users.StripeKey
             };
 

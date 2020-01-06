@@ -42,7 +42,7 @@ namespace MultiVendorAPI.Controllers
                      Level = x.Level,
                       MasterId = x.MasterId,
                        Name = x.Name,
-                        AgentId = x.AgentId,
+                        UsersId = x.UsersId,
                          StripeKey = x.StripeKey
 
             });
@@ -73,7 +73,7 @@ namespace MultiVendorAPI.Controllers
                 Level = x.Level,
                 MasterId = x.MasterId,
                 Name = x.Name,
-                AgentId = x.AgentId,
+                UsersId = x.UsersId,
                 StripeKey = x.StripeKey
 
             });
