@@ -18,6 +18,6 @@ namespace MultiVendorAPI.Dtos
         public string Level { get; set; }
         public ICollection<Users> Agent { get; set; }
         public int MasterId { get; set; }
-        public int UsersId { get; set; }
+        public int StokisId { get; set; }
     }
 }
