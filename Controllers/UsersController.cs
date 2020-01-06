@@ -42,7 +42,7 @@ namespace MultiVendorAPI.Controllers
                      Level = x.Level,
                       MasterId = x.MasterId,
                        Name = x.Name,
-                        StokisId = x.StokisId,
+                        AgentId = x.AgentId,
                          StripeKey = x.StripeKey
 
             });
@@ -50,6 +50,38 @@ namespace MultiVendorAPI.Controllers
 
             return Ok(user);
         }
+
+
+
+        // GET: api/Users
+        [HttpGet("stokis")]
+        public async Task<IActionResult> Getstokis()
+        {
+            List<UserToSend> user;
+            List<Users> buser;
+
+            buser = await _context.users.Where(x => x.Level == "stokis").ToListAsync();
+
+            user = buser.ConvertAll(x => new UserToSend
+            {
+
+                Address = x.Address,
+                Agent = x.Agent,
+                Email = x.Email,
+                Facebook = x.Facebook,
+                Id = x.Id,
+                Level = x.Level,
+                MasterId = x.MasterId,
+                Name = x.Name,
+                AgentId = x.AgentId,
+                StripeKey = x.StripeKey
+
+            });
+
+
+            return Ok(user);
+        }
+
 
         // GET: api/Users/5
         [HttpGet("{id}")]

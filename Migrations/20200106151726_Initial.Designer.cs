@@ -10,8 +10,8 @@ using MultiVendorAPI.Data;
 namespace MultiVendorAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200106082321_PasswordInitial")]
-    partial class PasswordInitial
+    [Migration("20200106151726_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,42 +20,6 @@ namespace MultiVendorAPI.Migrations
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MultiVendorAPI.Dtos.UserToSend", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Facebook")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MasterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StokisId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StripeKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ruser");
-                });
 
             modelBuilder.Entity("MultiVendorAPI.Models.Users", b =>
                 {
@@ -91,21 +55,19 @@ namespace MultiVendorAPI.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StokisId")
                         .HasColumnType("int");
 
                     b.Property<string>("StripeKey")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserToSendId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UsersId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserToSendId");
 
                     b.HasIndex("UsersId");
 
@@ -114,10 +76,6 @@ namespace MultiVendorAPI.Migrations
 
             modelBuilder.Entity("MultiVendorAPI.Models.Users", b =>
                 {
-                    b.HasOne("MultiVendorAPI.Dtos.UserToSend", null)
-                        .WithMany("Agent")
-                        .HasForeignKey("UserToSendId");
-
                     b.HasOne("MultiVendorAPI.Models.Users", null)
                         .WithMany("Agent")
                         .HasForeignKey("UsersId");
