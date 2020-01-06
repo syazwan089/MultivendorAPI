@@ -10,8 +10,8 @@ using MultiVendorAPI.Data;
 namespace MultiVendorAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200106153744_editagentID")]
-    partial class editagentID
+    [Migration("20200106161744_initials")]
+    partial class initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,6 @@ namespace MultiVendorAPI.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -60,6 +57,9 @@ namespace MultiVendorAPI.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StokisId")
+                        .HasColumnType("int");
 
                     b.Property<string>("StripeKey")
                         .HasColumnType("nvarchar(max)");
