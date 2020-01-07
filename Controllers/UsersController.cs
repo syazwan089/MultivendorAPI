@@ -116,7 +116,7 @@ namespace MultiVendorAPI.Controllers
 
 
         // GET: api/Users
-        [HttpGet("agent/pending")]
+        [HttpGet("agent/pending/{id}")]
         public async Task<IActionResult> agent(int id)
         {
             List<UserToSend> user;
