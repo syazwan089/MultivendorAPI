@@ -29,22 +29,21 @@ namespace MultiVendorAPI.Controllers
             List<UserToSend> user;
             List<Users> buser;
 
-            buser = await _context.users.Include("Agent").ToListAsync();
+            buser = await _context.users.Include("Agent").Where(x => x.Status == "Approve").ToListAsync();
 
             user = buser.ConvertAll(x => new UserToSend
             {
 
                 Address = x.Address,
-                 Agent = x.Agent,
-                  Email = x.Email,
-                   Facebook = x.Facebook,
-                    Id = x.Id,
-                     Level = x.Level,
-                      MasterId = x.MasterId,
-                       Name = x.Name,
-                         StokisId = x.StokisId,
-                         Phone = x.Phone,
-                         StripeKey = x.StripeKey
+                Agent = x.Agent,
+                Email = x.Email,
+                Facebook = x.Facebook,
+                Id = x.Id,
+                Level = x.Level,
+                Name = x.Name,
+                StokisId = x.StokisId,
+                Phone = x.Phone,
+                StripeKey = x.StripeKey
 
             });
 
@@ -61,7 +60,7 @@ namespace MultiVendorAPI.Controllers
             List<UserToSend> user;
             List<Users> buser;
 
-            buser = await _context.users.Where(x => x.Level == "stokis").ToListAsync();
+            buser = await _context.users.Where(x => x.Level == "Stokis" && x.Status == "Approve").ToListAsync();
 
             user = buser.ConvertAll(x => new UserToSend
             {
@@ -72,7 +71,6 @@ namespace MultiVendorAPI.Controllers
                 Facebook = x.Facebook,
                 Id = x.Id,
                 Level = x.Level,
-                MasterId = x.MasterId,
                 Name = x.Name,
                 StokisId = x.StokisId,
                 StripeKey = x.StripeKey
@@ -82,6 +80,74 @@ namespace MultiVendorAPI.Controllers
 
             return Ok(user);
         }
+
+
+
+
+
+        // GET: api/Users
+        [HttpGet("stokis/pending")]
+        public async Task<IActionResult> GetstokisPending()
+        {
+            List<UserToSend> user;
+            List<Users> buser;
+
+            buser = await _context.users.Where(x => x.Level == "Stokis" && x.Status == "Pending").ToListAsync();
+
+            user = buser.ConvertAll(x => new UserToSend
+            {
+
+                Address = x.Address,
+                Agent = x.Agent,
+                Email = x.Email,
+                Facebook = x.Facebook,
+                Id = x.Id,
+                Level = x.Level,
+                Name = x.Name,
+                StokisId = x.StokisId,
+                StripeKey = x.StripeKey
+
+            });
+
+
+            return Ok(user);
+        }
+
+
+
+        // GET: api/Users
+        [HttpGet("agent/pending")]
+        public async Task<IActionResult> agent(int id)
+        {
+            List<UserToSend> user;
+            List<Users> buser;
+
+            buser = await _context.users.Where(x => x.Level == "Agent" && x.StokisId == id && x.Status == "Pending").ToListAsync();
+
+            user = buser.ConvertAll(x => new UserToSend
+            {
+
+                Address = x.Address,
+                Agent = x.Agent,
+                Email = x.Email,
+                Facebook = x.Facebook,
+                Id = x.Id,
+                Level = x.Level,
+                Name = x.Name,
+                StokisId = x.StokisId,
+                StripeKey = x.StripeKey
+
+            });
+
+
+            return Ok(user);
+        }
+
+
+
+
+
+
 
 
         // GET: api/Users/5
@@ -98,17 +164,20 @@ namespace MultiVendorAPI.Controllers
             return users;
         }
 
+
+
+
+
+
         // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, Users users)
+        [HttpGet("approve/{id}")]
+        public async Task<IActionResult> PutUsers(int id)
         {
-            if (id != users.Id)
-            {
-                return BadRequest();
-            }
 
+            var users = await _context.users.FindAsync(id);
+            users.Status = "Approve";
             _context.Entry(users).State = EntityState.Modified;
 
             try
@@ -127,7 +196,7 @@ namespace MultiVendorAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Users

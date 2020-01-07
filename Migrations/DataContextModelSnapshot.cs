@@ -19,6 +19,30 @@ namespace MultiVendorAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MultiVendorAPI.Models.Master", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StripeKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("master");
+                });
+
             modelBuilder.Entity("MultiVendorAPI.Models.Users", b =>
                 {
                     b.Property<int>("Id")
@@ -38,7 +62,7 @@ namespace MultiVendorAPI.Migrations
                     b.Property<string>("Level")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MasterId")
+                    b.Property<int?>("MasterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -56,6 +80,9 @@ namespace MultiVendorAPI.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StokisId")
                         .HasColumnType("int");
 
@@ -67,6 +94,8 @@ namespace MultiVendorAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MasterId");
+
                     b.HasIndex("UsersId");
 
                     b.ToTable("users");
@@ -74,6 +103,10 @@ namespace MultiVendorAPI.Migrations
 
             modelBuilder.Entity("MultiVendorAPI.Models.Users", b =>
                 {
+                    b.HasOne("MultiVendorAPI.Models.Master", null)
+                        .WithMany("Stokis")
+                        .HasForeignKey("MasterId");
+
                     b.HasOne("MultiVendorAPI.Models.Users", null)
                         .WithMany("Agent")
                         .HasForeignKey("UsersId");

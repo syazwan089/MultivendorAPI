@@ -12,6 +12,6 @@ namespace MultiVendorAPI.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Users> users { get; set; }
-
+        public DbSet<Master> master { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace MultiVendorAPI.Models
         public string Facebook { get; set; }
         public string Phone { get; set; }
         public string StripeKey { get; set; }
+        public string Status { get; set; }
         public string Level { get; set; }
         public ICollection<Users> Agent { get; set; }
-        public int MasterId { get; set; }
         public int StokisId { get; set; }
     }
 }

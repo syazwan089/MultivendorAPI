@@ -33,13 +33,17 @@ namespace MultiVendorAPI.Data
                 return null;
             }
 
+            if(users.Status != "Approve")
+            {
+                return null;
+            }
+
             UserToSend send = new UserToSend { Address = users.Address,
                 Email = users.Email,
                 Agent = users.Agent,
                 Facebook = users.Facebook,
                 Id = users.Id,
                 Level = users.Level,
-                MasterId = users.MasterId,
                 Name = users.Name,
                 Phone = users.Phone,
                 StokisId = users.StokisId,
@@ -77,7 +81,7 @@ namespace MultiVendorAPI.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-
+            user.Status = "Pending";
             await _context.users.AddAsync(user);
             await _context.SaveChangesAsync();
 
