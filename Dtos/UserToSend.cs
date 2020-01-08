@@ -14,6 +14,8 @@ namespace MultiVendorAPI.Dtos
         public string Address { get; set; }
         public string Facebook { get; set; }
         public string StripeKey { get; set; }
+
+        public string Status { get; set; }
         public string Phone { get; set; }
         public string Level { get; set; }
         public ICollection<Users> Agent { get; set; }

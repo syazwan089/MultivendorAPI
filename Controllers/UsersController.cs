@@ -41,6 +41,7 @@ namespace MultiVendorAPI.Controllers
                 Id = x.Id,
                 Level = x.Level,
                 Name = x.Name,
+                Status = x.Status,
                 StokisId = x.StokisId,
                 Phone = x.Phone,
                 StripeKey = x.StripeKey
