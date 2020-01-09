@@ -44,6 +44,7 @@ namespace MultiVendorAPI.Data
                 Facebook = users.Facebook,
                 Id = users.Id,
                 Level = users.Level,
+                Status = users.Status,
                 Name = users.Name,
                 Phone = users.Phone,
                 StokisId = users.StokisId,

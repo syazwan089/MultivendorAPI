@@ -54,7 +54,7 @@ namespace MultiVendorAPI.Controllers
                     new Claim(ClaimTypes.Name, userFromRepo.Name),
                     new Claim(ClaimTypes.Email, userFromRepo.Email),
                     new Claim(ClaimTypes.Role, userFromRepo.Level),
-                    new Claim(ClaimTypes.UserData, userFromRepo.Status)
+                    new Claim(ClaimTypes.Authentication, userFromRepo.Status)
                 };
 
                 //Create Token
