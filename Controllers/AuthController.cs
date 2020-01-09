@@ -39,6 +39,11 @@ namespace MultiVendorAPI.Controllers
         {
             var userFromRepo = await _repo.Login(userLoginDto.Email, userLoginDto.Password);
 
+            if (userFromRepo.Status != "Approve")
+            {
+                return Unauthorized("In Review");
+            }
+
             if (userFromRepo == null)
             {
                 return Unauthorized("No Record Found!");

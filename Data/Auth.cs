@@ -33,10 +33,7 @@ namespace MultiVendorAPI.Data
                 return null;
             }
 
-            if(users.Status != "Approve")
-            {
-                return null;
-            }
+         
 
             UserToSend send = new UserToSend { Address = users.Address,
                 Email = users.Email,
